@@ -30,7 +30,7 @@ Each team member was assigned a specific role with corresponding responsibilitie
 ### Note on Driver Login:
 - Drivers have specific login details. To log in as a driver, check the credentials in the `Resources -> Data -> users` directory. Drivers are assigned the role number **4**.
 
-## Main Page Help
+## Driver's Main Page
 
 ![Main Page](https://github.com/user-attachments/assets/bef44c22-5359-46a8-aea4-e86e7fd1603e)
 
@@ -57,7 +57,7 @@ This section provides an overview of the Main Page and its key features:
 7. **Profile Button:**
    - Check your profile and vehicle information.
 
-## Profile Page Help
+## Driver's Profile Page
 
 ![Profile Page](https://github.com/user-attachments/assets/d1541701-72e6-46ea-a92d-1de7d0a93ab9)
 
