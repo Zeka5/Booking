@@ -29,3 +29,57 @@ Each team member was assigned a specific role with corresponding responsibilitie
 
 ### Note on Driver Login:
 - Drivers have specific login details. To log in as a driver, check the credentials in the `Resources -> Data -> users` directory. Drivers are assigned the role number **4**.
+
+## Main Page Help
+
+![Main Page](https://github.com/user-attachments/assets/bef44c22-5359-46a8-aea4-e86e7fd1603e)
+
+This section provides an overview of the Main Page and its key features:
+
+1. **Today's Drives:**
+   - View a list of all your scheduled drives, including the start and end addresses, and the scheduled time.
+
+2. **Notifications Tab:**
+   - Stay updated with the latest notifications.
+
+3. **Dismiss Drive Button:**
+   - Easily dismiss a drive.
+
+4. **Status Buttons:**
+   - Indicate your status with 'Late' and 'On Location' buttons.
+
+5. **Timer:**
+   - Track your driving time accurately with the built-in timer.
+
+6. **Action Buttons:**
+   - Use the 'Leave' and 'Start' buttons to manage your drive actions.
+
+7. **Profile Button:**
+   - Check your profile and vehicle information.
+
+## Profile Page Help
+
+![Profile Page](https://github.com/user-attachments/assets/d1541701-72e6-46ea-a92d-1de7d0a93ab9)
+
+This page is designed to provide a comprehensive overview of the driver's profile and vehicle information. Here are the key sections and functionalities:
+
+1. **Driver's Information:**
+   - Includes important details about the driver and personal information.
+
+2. **Driving Points:**
+   - Shows the total driving points accumulated by the driver, used to become a SuperDriver (15 points).
+
+3. **Drive Statistics Button:**
+   - Provides access to detailed statistics about the driver's trips, including driving price, time spent driving, and number of drives.
+
+4. **Next Drive Timer:**
+   - A countdown timer showing the time remaining until the next scheduled drive.
+
+5. **Request Break:**
+   - A button for the driver to request a break.
+
+6. **Vehicle Information:**
+   - Includes details about the registered vehicle.
+
+7. **Dismiss Vehicle:**
+   - A button to unregister a vehicle.
