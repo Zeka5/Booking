@@ -1,0 +1,97 @@
+﻿<Window x:Class="BookingApp.WPF.View.DriverView.WizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.DriverView"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="WizardWindow" Height="350" Width="550"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <xctk:Wizard FinishButtonClosesWindow="True">
+            <xctk:WizardPage x:Name="IntroPage"  HelpButtonVisibility="Hidden"
+                                   Title="Welcome to DriverApp!"
+                                   Description="&#x0a;I'm your personal driving wizard, here to guide you through a seamless and safe driving experience. From registering a vehicle to managing taximeter and drives, I'm here to assist you every step of the way.&#x0a;&#x0a;Let's hit the road.">
+                <Image Source="/Resources/Images/vehicle4.jpg"></Image>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page1" PageType="Interior"
+                                   Title="Home Page Overview" HelpButtonVisibility="Hidden"
+                                   NextPage="{Binding ElementName=Page2}"
+                                   PreviousPage="{Binding ElementName=IntroPage}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/homepage.png" Height="300" Width="300"/>
+                        <TextBlock>
+                            <Run Text="&#x0a;In this app, you can easily manage your daily drives and notifications.&#x0a;The interface is designed to be user-friendly and efficient:&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Today's Drives:"/>
+                            <Run Text="View a list of all your scheduled drives,including the&#x0a;start and end addresses, and the scheduled time.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Notifications Tab:"/>
+                            <Run Text="Stay updated with the latest notifications.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Dismiss Drive Button:"/>
+                            <Run Text="Easily dismiss drive.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Status Buttons:"/>
+                            <Run Text="Indicate your status with 'Late' and 'On Location' buttons.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Timer:"/>
+                            <Run Text="Track your driving time accurately with the built-in timer.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Action Buttons:"/>
+                            <Run Text="Use the 'Leave' and 'Start' buttons to manage your drive actions.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Help Icon:"/>
+                            <Run Text="Provides access to help and support resources."/>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page2" PageType="Interior" 
+                                   Title="Driver's Profile Page Overview" HelpButtonVisibility="Hidden">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/profilepage.png" Height="300" Width="300"/>
+                        <TextBlock>
+                            <Run Text="&#x0a;This page is designed to provide a comprehensive overview of the driver's profile and vehicle information.&#x0a;Here are the key sections and functionalities:&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Driver's Information:"/>
+                            <Run Text="Includes important details about driver and presonal information.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Driving Points:"/>
+                            <Run Text="Shows the total driving points, accumulated by the driver, used to become a SuperDriver (15 points).&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Drive Statistics Button:"/>
+                            <Run Text="Provides access to detailed statistics about the driver's trips,&#x0a;including driving price, time spent driving, and number of drives.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Register Vehicle Button:"/>
+                            <Run Text="A button to initiate the vehicle registration process.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Next Drive Timer:"/>
+                            <Run Text="A countdown timer showing the time remaining until the next scheduled drive.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Edit Profile:"/>
+                            <Run Text="A button to allow the driver to edit their profile details.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Request Break:"/>
+                            <Run Text="A button for the driver to request a break."/>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="Page3" PageType="Interior"
+                                   Title="Statistics Page Overview" HelpButtonVisibility="Hidden">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/vehicle2.jpeg"/>
+                        <TextBlock>
+                            <Run Text="&#x0a;This page provides an overview of the driver's performance and statistics over a selected period.&#x0a;Here are the key sections and functionalities:&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="PDF Export Button:"/>
+                            <Run Text="Allows the driver to export the displayed statistics as a PDF document.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Average Number of Drives:"/>
+                            <Run Text="Displays the average number of drives taken, along with a line graph&#x0a;showing the distribution of drives throughout the selected period.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Average Drive Length:"/>
+                            <Run Text="Shows the average length of each drive, accompanied by a line graph&#x0a;that visualizes drive lengths over the selected period.&#x0a;&#x0a;"/>
+                            <Run FontWeight="Bold" Text="Average Drive Price:"/>
+                            <Run Text="Indicates the average price per drive, with a line graph illustrating&#x0a;the pricing trends over the selected period.&#x0a;&#x0a;"/>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="LastPage" PageType="Exterior"
+                                   Title="Congratulations!"
+                                   Description="&#x0a;&#x0a;You’ve successfully completed the setup process. Welcome to DriveApp!
+&#x0a;&#x0a;You’re now ready to hit the road and enjoy a seamless driving experience. Remember, you can always refer to the help section for any assistance.
+&#x0a;Safe driving!"
+                                   CanFinish="True"/>
+        </xctk:Wizard>
+    </Grid>
+</Window>

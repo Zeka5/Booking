@@ -1,0 +1,681 @@
+﻿<Page x:Class="BookingApp.WPF.View.ReserveDrivePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:BookingApp.WPF.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReserveDrivePage">
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="Green" Color="#CEEA9E"/>
+        <SolidColorBrush x:Key="Dark blue" Color="#016A7B"/>
+        <SolidColorBrush x:Key="Bronze" Color="#CB8222"/>
+        <SolidColorBrush x:Key="Light blue" Color="#BDE8ED"/>
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+          x:Name="Border" 
+          Grid.ColumnSpan="2"
+          CornerRadius="5,5,5,5"
+          Background="White"
+          BorderBrush="#016A7B"
+          BorderThickness="1"/>
+                <Border 
+          Grid.Column="0"
+          CornerRadius="5" 
+          Margin="1" 
+          Background="Transparent" 
+          BorderBrush="White"
+          BorderThickness="1,1,0,1"/>
+                <Path 
+          x:Name="Arrow"
+          Grid.Column="1"     
+          Fill="#016A7B"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+        />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost"/>
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                    Name="ToggleButton" 
+                    Template="{StaticResource ComboBoxToggleButton}" 
+                    Grid.Column="2" 
+                    Focusable="false"
+                    IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                    ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                    ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                    Margin="3,3,23,3"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" />
+
+                            <Popup 
+                    Name="Popup"
+                    Placement="Bottom"
+                    IsOpen="{TemplateBinding IsDropDownOpen}"
+                    AllowsTransparency="True" 
+                    Focusable="False"
+                    PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                      SnapsToDevicePixels="True"                
+                      MinWidth="{TemplateBinding ActualWidth}"
+                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                        x:Name="DropDownBorder"
+                        Background="White"
+                        CornerRadius="5"
+                        BorderThickness="1"
+                        BorderBrush="#016A7B"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="5"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                      Padding="2"
+                      SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#F6F5F2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                        Storyboard.TargetProperty="Width"
+                        To="130"
+                        Duration="0:0:0.1"/>
+                            <DoubleAnimation
+                        Storyboard.TargetProperty="Height"
+                        To="35"
+                        Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                        Storyboard.TargetProperty="Width"
+                        To="120"
+                        Duration="0:0:0.1"/>
+                            <DoubleAnimation
+                        Storyboard.TargetProperty="Height"
+                        To="30"
+                        Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{StaticResource Bronze}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border BorderBrush="{StaticResource Dark blue}" BorderThickness="1" CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="30,0,0,15"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style x:Key="CustomDateTimePickerStyle" TargetType="xctk:DateTimePicker">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <!-- Other setters as needed -->
+
+            <!-- Setters for the Template -->
+        </Style>
+
+    </Page.Resources>
+
+    <TabControl>
+        <TabItem>
+            <TabItem.Header>
+                Individual drives
+            </TabItem.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Padding="0,15,0,0" Grid.Row="0" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start destionation</Label>
+                <Label Padding="0,15,0,0" Grid.Row="1" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start street adress</Label>
+                <Label Padding="0,15,0,0" Grid.Row="2" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start street number</Label>
+                <Label Padding="0,15,0,0" Grid.Row="0" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End destination</Label>
+                <Label Padding="0,15,0,0" Grid.Row="1" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End street adress</Label>
+                <Label Padding="0,15,0,0" Grid.Row="2" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End street number</Label>
+                <!--<Label Padding="0,15,0,0" Grid.Row="3" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start time</Label>-->
+
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center">
+                    <Label Padding="0,20,0,0" 
+                    Style="{StaticResource CustomLabelStyle}"
+                   Margin="0,0,10,17">
+                        Start time
+                    </Label>
+                    <xctk:DateTimePicker 
+                Name="DriveStartTime"
+                             Height="30"
+                             Width="220"
+                             VerticalAlignment="Center">
+                    </xctk:DateTimePicker>
+                    <CheckBox x:Name="VoucherCheckbox"
+                    Content="Fast drive"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding IsFastDrive}"
+                    Margin="50,0,0,0"
+                              Padding="6,1,0,0">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.7" ScaleY="1.7" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                </StackPanel>
+
+
+                <ComboBox Grid.Column="1" Grid.Row="0" 
+                    Width="150" Height="35"
+                    ItemsSource="{Binding Locations}"
+                    x:Name="startDestination"
+                  VerticalAlignment="Center"
+                    SelectedItem="{Binding SelectedStartLocation , UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding City}"/>
+                                <TextBlock Text=","/>
+                                <TextBlock Text="{Binding Country}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=StartAddress.Street}"></TextBox>
+
+                <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=StartAddress.StreetNumber}"></TextBox>
+
+                <ComboBox Grid.Column="3" Grid.Row="0" Margin="0,0,20,0"
+    Width="150" Height="35"
+    ItemsSource="{Binding Locations}"
+    x:Name="finalDestination"
+                  VerticalAlignment="Center"
+    SelectedItem="{Binding SelectedEndLocation , UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding City}"/>
+                                <TextBlock Text=","/>
+                                <TextBlock Text="{Binding Country}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBox Grid.Column="3" Grid.Row="1" Margin="0,0,20,0" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=EndAddress.Street}"></TextBox>
+
+                <TextBox Grid.Column="3" Grid.Row="2" Margin="0,0,20,0" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=EndAddress.StreetNumber}"></TextBox>
+
+
+                <!--<xctk:DateTimePicker Name="DriveStartTime"
+                             Grid.Column="1" Grid.Row="3"
+                             Height="30"
+                             Width="150"
+                             VerticalAlignment="Center">
+        </xctk:DateTimePicker>-->
+
+                <!--<CheckBox x:Name="VoucherCheckbox"
+      Grid.Column="2"
+                  Grid.ColumnSpan="2"
+      Grid.Row="3"
+      Content="Fast drive"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      IsChecked="{Binding HasVoucher}"
+      Margin="0,0,0,0"
+      FontSize="12">
+
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>-->
+
+                <!--<Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" 
+                VerticalAlignment="Top"
+            Content="Rersve a drive" Height="30" Width="100" Click="DriveReservationClick">
+        </Button>-->
+
+                <Button x:Name="TourRateButton" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" 
+Click="DriveReservationClick"
+Content="Rersve a drive" 
+Width="125" 
+Height="30" 
+FontSize="18" 
+                Margin="0,0,0,30"
+Visibility="Visible"
+Background="#CB8222"
+Foreground="White">
+                    <Button.Resources>
+                        <Storyboard x:Key="HoverAnimation">
+                            <DoubleAnimation
+            Storyboard.TargetProperty="Width"
+            To="128"
+            Duration="0:0:0.1"/>
+                            <DoubleAnimation
+            Storyboard.TargetProperty="Height"
+            To="34"
+            Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                  VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard Storyboard="{StaticResource HoverAnimation}"/>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                            Storyboard.TargetProperty="Width"
+                            To="125"
+                            Duration="0:0:0.1"/>
+                                            <DoubleAnimation
+                            Storyboard.TargetProperty="Height"
+                            To="30"
+                            Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                Group drives
+            </TabItem.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Padding="0,15,0,0" Grid.Row="0" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start destionation</Label>
+                <Label Padding="0,15,0,0" Grid.Row="1" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start street adress</Label>
+                <Label Padding="0,15,0,0" Grid.Row="2" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start street number</Label>
+                <Label Padding="0,15,0,0" Grid.Row="0" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End destination</Label>
+                <Label Padding="0,15,0,0" Grid.Row="1" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End street adress</Label>
+                <Label Padding="0,15,0,0" Grid.Row="2" Grid.Column="2"
+               Style="{StaticResource CustomLabelStyle}">End street number</Label>
+                <!--<Label Padding="0,15,0,0" Grid.Row="3" Grid.Column="0"
+               Style="{StaticResource CustomLabelStyle}">Start time</Label>-->
+
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+            HorizontalAlignment="Center">
+                    <Label Padding="0,20,0,0" 
+            Style="{StaticResource CustomLabelStyle}"
+           Margin="0,0,10,17">Start time</Label>
+                    <xctk:DateTimePicker 
+        Name="DriveStartTimes"
+                     Height="30"
+                     Width="220"
+                     VerticalAlignment="Center">
+                    </xctk:DateTimePicker>
+
+                    <Label Padding="0,20,0,0" 
+                 Style="{StaticResource CustomLabelStyle}"
+                Margin="0,0,10,17">Tour guests
+                    </Label>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+
+                        <TextBox Name="NumberTextBox" Text="{Binding Path=NumberOfGuests, Mode=TwoWay}" Width="50" HorizontalAlignment="Center"
+     FontWeight="Bold">
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="5,5,0,0"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="+" Click="IncreaseNumberOfTourGuestsCLick" Width="30"
+        Background="White"
+        Foreground="{StaticResource Dark blue}"
+        FontWeight="ExtraBold"
+        BorderBrush="{StaticResource Dark blue}"
+        BorderThickness="1">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="5,0,0,5"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button Content="-" Click="DecreaseNumberOfTourGuestsCLick" Width="30"
+        Background="White"
+        Foreground="{StaticResource Dark blue}"
+        FontWeight="ExtraBold"
+        BorderBrush="{StaticResource Dark blue}"
+        BorderThickness="1">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,5,5,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Label Padding="0,20,0,0" 
+                 Style="{StaticResource CustomLabelStyle}"
+                Margin="0,0,10,17">Language
+                    </Label>
+
+                    <ComboBox Grid.Column="3" Grid.Row="1" Margin="0,0,20,0"
+Width="150" Height="35"
+ItemsSource="{Binding Languages}"
+x:Name="LanguageComboBox"   
+VerticalAlignment="Center"
+SelectedItem="{Binding SelectedLanguage , UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+
+                <ComboBox Grid.Column="1" Grid.Row="0" 
+                    Width="150" Height="35"
+                    ItemsSource="{Binding Locations}"
+                    x:Name="startDestinationA"
+                  VerticalAlignment="Center"
+                    SelectedItem="{Binding SelectedStartLocation , UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding City}"/>
+                                <TextBlock Text=","/>
+                                <TextBlock Text="{Binding Country}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=StartAddress.Street}"></TextBox>
+
+                <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=StartAddress.StreetNumber}"></TextBox>
+
+                <ComboBox Grid.Column="3" Grid.Row="0" Margin="0,0,20,0"
+    Width="150" Height="35"
+    ItemsSource="{Binding Locations}"
+    x:Name="finalDestinationa"
+                  VerticalAlignment="Center"
+    SelectedItem="{Binding SelectedEndLocation , UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding City}"/>
+                                <TextBlock Text=","/>
+                                <TextBlock Text="{Binding Country}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBox Grid.Column="3" Grid.Row="1" Margin="0,0,20,0" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=EndAddress.Street}"></TextBox>
+
+                <TextBox Grid.Column="3" Grid.Row="2" Margin="0,0,20,0" Style="{StaticResource CustomTextBoxStyle}"
+    Text="{Binding Path=EndAddress.StreetNumber}"></TextBox>
+
+
+                <!--<xctk:DateTimePicker Name="DriveStartTime"
+                             Grid.Column="1" Grid.Row="3"
+                             Height="30"
+                             Width="150"
+                             VerticalAlignment="Center">
+        </xctk:DateTimePicker>-->
+
+                <!--<CheckBox x:Name="VoucherCheckbox"
+      Grid.Column="2"
+                  Grid.ColumnSpan="2"
+      Grid.Row="3"
+      Content="Fast drive"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      IsChecked="{Binding HasVoucher}"
+      Margin="0,0,0,0"
+      FontSize="12">
+
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>-->
+
+                <!--<Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" 
+                VerticalAlignment="Top"
+            Content="Rersve a drive" Height="30" Width="100" Click="DriveReservationClick">
+        </Button>-->
+
+                <Button x:Name="TourRateButtona" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" 
+Click="GroupDriveReservationClick"
+Content="Rersve" 
+Width="125" 
+Height="30" 
+FontSize="18" 
+                Margin="0,0,0,30"
+Visibility="Visible"
+Background="#CB8222"
+Foreground="White">
+                    <Button.Resources>
+                        <Storyboard x:Key="HoverAnimation">
+                            <DoubleAnimation
+            Storyboard.TargetProperty="Width"
+            To="128"
+            Duration="0:0:0.1"/>
+                            <DoubleAnimation
+            Storyboard.TargetProperty="Height"
+            To="34"
+            Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                  VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard Storyboard="{StaticResource HoverAnimation}"/>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                            Storyboard.TargetProperty="Width"
+                            To="125"
+                            Duration="0:0:0.1"/>
+                                            <DoubleAnimation
+                            Storyboard.TargetProperty="Height"
+                            To="30"
+                            Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Page>

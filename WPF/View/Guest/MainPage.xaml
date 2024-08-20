@@ -1,0 +1,215 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guest.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+      xmlns:val="clr-namespace:BookingApp.View.Validation"
+      xmlns:viewModel="clr-namespace:BookingApp.WPF.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="430"
+      Background="#E3fef7"
+      Title="MainPage">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <TextBlock TextAlignment="Center" FontSize="30" FontWeight="Bold" Margin="0,0,0,10">Booking App</TextBlock>
+            </Grid>
+
+            <Border DockPanel.Dock="Top" Margin="10,0,10,0" Background="{StaticResource SecondaryColor}" Style="{StaticResource KozicBorder}">
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.ColumnSpan="2" Margin="10,0,0,10">
+                        <TextBlock TextAlignment="Left" FontSize="20" FontWeight="DemiBold">Search accommodation</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">Name</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="2" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">City</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="3" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">Country</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="4" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">Number of guests</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="5" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">Days to stay number</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="6" Margin="10,0,0,20">
+                        <TextBlock FontSize="15">Type</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="1" Margin="0,0,10,20">
+                        <TextBox Text="{Binding Path=AccommodationName , UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource KozicTextBox}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2" Margin="0,0,10,20">
+                        <TextBox Text="{Binding Path=City , UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource KozicTextBox}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="3" Margin="0,0,10,20">
+                        <TextBox Text="{Binding Path=Country , UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource KozicTextBox}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="4" Margin="0,0,10,20">
+                        <TextBox x:Name="GuestNumberTextBox" Style="{StaticResource KozicTextBox}">
+                            <TextBox.Text>
+                                <Binding Path="GuestNumber" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:GuestNumberValidation x:Name="GuestNumberValidation" ValidationStep="RawProposedValue" Min="0" Max="100"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            <Validation.ErrorTemplate>
+                                <ControlTemplate >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <AdornedElementPlaceholder Grid.Row="0" Grid.Column="0"></AdornedElementPlaceholder>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent , UpdateSourceTrigger=PropertyChanged}" Foreground="Red"></TextBlock>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Validation.ErrorTemplate>
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="5" Margin="0,0,10,20">
+                        <TextBox x:Name="DaysToStayTextBox" Style="{StaticResource KozicTextBox}">
+                            <TextBox.Text>
+                                <Binding Path="Day" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:DaysToStayValidation ValidationStep="RawProposedValue" x:Name="DaysToStayValidation" Min="0"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            <Validation.ErrorTemplate>
+                                <ControlTemplate >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <AdornedElementPlaceholder Grid.Row="0" Grid.Column="0"></AdornedElementPlaceholder>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent , UpdateSourceTrigger=PropertyChanged}" Foreground="Red"></TextBlock>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Validation.ErrorTemplate>
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="6" Margin="0,0,10,20">
+                        <ComboBox ItemsSource="{Binding Path=Types }" SelectedItem="{Binding Path=SelectedType , UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Row="7" Grid.Column="0" Margin="10,0,0,20">
+                        <CheckBox Content="Fast reserve">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                    </Grid>
+                    <Grid Grid.Row="7" Grid.Column="1" Margin="0,0,0,10">
+                        <Button Margin="0,0,100,0" Width="60" Content="Search" Command="{Binding SearchCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource KozicButton}">
+                                    
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=GuestNumberTextBox,Path=(Validation.HasError), UpdateSourceTrigger=PropertyChanged}" Value="True" >
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=DaysToStayTextBox,Path=(Validation.HasError), UpdateSourceTrigger=PropertyChanged}" Value="True" >
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Margin="100,0,0,0" Width="60" Content="Reset" Command="{Binding ResetCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource KozicButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=GuestNumberTextBox,Path=(Validation.HasError), UpdateSourceTrigger=PropertyChanged}" Value="True" >
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=DaysToStayTextBox,Path=(Validation.HasError), UpdateSourceTrigger=PropertyChanged}" Value="True" >
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Grid DockPanel.Dock="Top" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="7" Margin="0,20,0,0">
+                <TextBlock FontSize="25" FontWeight="Bold">Accommodations</TextBlock>
+            </Grid>
+            <ItemsControl Background="Transparent"  ItemsSource="{Binding Path=AccommodationList , UpdateSourceTrigger=PropertyChanged}"  Margin="20,10,20,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate >
+                        <Border Background="{StaticResource SecondaryColor}" Margin="0,10,0,0" Style="{StaticResource KozicBorder}">
+                            <Grid Height="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.ColumnSpan="3" >
+                                    <TextBlock Text="{Binding Path=Name}" FontSize="20" FontWeight="Bold" TextAlignment="Center"></TextBlock>
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="../../../Resources/Images/location.png" Width="16" Height="16"  />
+                                        <TextBlock Text="{Binding Path=Location}" FontSize="15" TextAlignment="Left" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="2" Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="../../../Resources/Images/house.png" Width="16" Height="16"/>
+                                        <TextBlock Text="{Binding Path=Type}" FontSize="15" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.Row="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="../../../Resources/Images/owner.png" Width="16" Height="16"  />
+                                        <TextBlock Text="9.1 - Excellent" FontSize="15" TextAlignment="Left" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.RowSpan="2">
+                                    <Image Source="{Binding Path=ImagePath}" Margin="5,0,10,0">
+                                        <Image.Effect>
+                                            <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+                                        </Image.Effect>
+                                    </Image>
+                                </Grid>
+                                <Grid Grid.Column="2" Grid.Row="2"  Margin="0,0,10,0" >
+                                    <Button VerticalAlignment="Center" Width="60" Height="20" HorizontalAlignment="Left" Content="View" Command="{Binding DataContext.AccommodationViewNavigationCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Style="{StaticResource KozicButton}"></Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+    </ScrollViewer>
+</Page>

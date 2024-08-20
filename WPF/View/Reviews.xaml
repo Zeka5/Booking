@@ -1,0 +1,106 @@
+﻿<Page x:Class="BookingApp.WPF.View.Reviews"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Reviews">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1,1,3,3" />
+            <Setter Property="Width" Value="50" />
+        </Style>
+    </Page.Resources>
+    
+    <Grid
+        Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Text="Reviews"
+            Grid.Row="0"
+            Margin="3"
+            VerticalAlignment="Center"
+            FontSize="30" />
+        <ScrollViewer
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Visible"
+            Margin="3">
+            <ItemsControl
+                ItemsSource="{Binding Reviews}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BorderBrush="Black"
+                            BorderThickness="2"
+                            Margin="3">
+                            <Grid
+                                Height="60">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Path=ImagePath}"></Image>
+                                <Grid
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        FontWeight="Bold"
+                                        Text="{Binding Path=GuestUsername}"/>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Orientation="Horizontal">
+                                        <TextBlock Text="Left: " />
+                                        <TextBlock Text="{Binding Path=DateLeft}" />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Orientation="Horizontal">
+                                        <TextBlock Text="Cleanliness: " />
+                                        <TextBlock Text="{Binding Path=Cleanliness}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Orientation="Horizontal">
+                                        <TextBlock Text="Owner correctness: " />
+                                        <TextBlock Text="{Binding Path=OwnerCorrectness}" />
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock
+                                    Grid.Column="3"
+                                    Text="{Binding Path=AdditionalComment}"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

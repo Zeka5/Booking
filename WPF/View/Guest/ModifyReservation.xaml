@@ -1,0 +1,46 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guest.ModifyReservation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="430"
+      Background="White"
+      Title="ModifyReservation">
+
+    <Grid Margin="20,0,20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="2">
+            <TextBlock Text="Enter your changes" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,20,0,0">
+            <TextBlock FontSize="20"> New arrival date</TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <TextBlock FontSize="20"> New checkout date</TextBlock>
+        </Grid>
+        <Grid Grid.Row="3" Margin="0,40,0,0">
+            <Button Content="Cancel" Width="100" Command="{Binding CancelCommand}"></Button>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0,40,0,0">
+            <Button Content="Send request" Width="100" Command="{Binding SendRequestCommand}"></Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0,20,0,0">
+            <DatePicker SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=ReservationChangeRequestDto.FirstDay , UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,20,0,0">
+            <DatePicker SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=ReservationChangeRequestDto.LastDay , UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+        </Grid>
+    </Grid>
+</Page>

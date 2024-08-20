@@ -1,0 +1,439 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\digital-7.ttf" />
+    <None Remove="Resources\Data\complexTourRequests.csv" />
+    <None Remove="Resources\Images\1.png" />
+    <None Remove="Resources\Images\2.png" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj11.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj12.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj13.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj2.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj21.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj22.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj23.jpg" />
+    <None Remove="Resources\Images\AccommodationImages\smestaj24.jpg" />
+    <None Remove="Resources\Images\account.jpg" />
+    <None Remove="Resources\Images\account2.png" />
+    <None Remove="Resources\Images\account3.png" />
+    <None Remove="Resources\Images\add-image.png" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\angle-left.png" />
+    <None Remove="Resources\Images\arrow.png" />
+    <None Remove="Resources\Images\arrow2.png" />
+    <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\book.png" />
+    <None Remove="Resources\Images\beogradcentar.jpg" />
+    <None Remove="Resources\Images\calendar.png" />
+    <None Remove="Resources\Images\cancelEvent.png" />
+    <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\desnaStrela.png" />
+    <None Remove="Resources\Images\driver.png" />
+    <None Remove="Resources\Images\driver_back.png" />
+    <None Remove="Resources\Images\driver_chart.png" />
+    <None Remove="Resources\Images\driver_help.png" />
+    <None Remove="Resources\Images\driver_medal.png" />
+    <None Remove="Resources\Images\driver_notification.png" />
+    <None Remove="Resources\Images\driver_signout.png" />
+    <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\exit.png" />
+    <None Remove="Resources\Images\flag.png" />
+    <None Remove="Resources\Images\forum.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\account.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\add-button.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\add-file.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\add.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\avatar.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\Background.jpg" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\Background2.jpg" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\Background2.webp" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\bar-graph.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\bin.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\biography.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\boy.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\businessman.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\chat.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\check.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\chronometer.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\close.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\compose.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\contract.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\deadline.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\diskette.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\duration.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\edit.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\email.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\family.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\flag.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\folder.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\good-mark.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\group.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\guidePlaceHolder.jpg" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\information.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\just-arrived.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\location.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\logout.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\multimedia.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\notoursplaceholder.jpg" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\observation.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\oldman.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\phone.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\pin.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\placeholder.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\play-button.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\play.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\quit.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\reportflag.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\translation.png" />
+    <None Remove="Resources\Images\GuideWallpaperAndIcons\verified.png" />
+    <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\homepage.png" />
+    <None Remove="Resources\Images\image.png" />
+    <None Remove="Resources\Images\icon_back.png" />
+    <None Remove="Resources\Images\icon_help.png" />
+    <None Remove="Resources\Images\icon_sign_out.png" />
+    <None Remove="Resources\Images\icon_statistics.png" />
+    <None Remove="Resources\Images\icon_super_driver.png" />
+    <None Remove="Resources\Images\hamburger.png" />
+    <None Remove="Resources\Images\house.png" />
+    <None Remove="Resources\Images\information.png" />
+    <None Remove="Resources\Images\kalemegdan.jpg" />
+    <None Remove="Resources\Images\krug.png" />
+    <None Remove="Resources\Images\levaStrela.jpg" />
+    <None Remove="Resources\Images\location.png" />
+    <None Remove="Resources\Images\mail.png" />
+    <None Remove="Resources\Images\maleAvatar.jpg" />
+    <None Remove="Resources\Images\map.png" />
+    <None Remove="Resources\Images\notification.png" />
+    <None Remove="Resources\Images\notifications.jpg" />
+    <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\novisadcentar.jpeg" />
+    <None Remove="Resources\Images\people.png" />
+    <None Remove="Resources\Images\petrovaradin.jpg" />
+    <None Remove="Resources\Images\power-button-off.png" />
+    <None Remove="Resources\Images\power-off.png" />
+    <None Remove="Resources\Images\power.png" />
+    <None Remove="Resources\Images\profile-user.png" />
+    <None Remove="Resources\Images\profilepage.png" />
+    <None Remove="Resources\Images\smestaj11.jpg" />
+    <None Remove="Resources\Images\smestaj12.jpg" />
+    <None Remove="Resources\Images\smestaj13.jpg" />
+    <None Remove="Resources\Images\smestaj2.jpg" />
+    <None Remove="Resources\Images\smestaj21.jpg" />
+    <None Remove="Resources\Images\smestaj22.jpg" />
+    <None Remove="Resources\Images\smestaj23.jpg" />
+    <None Remove="Resources\Images\smestaj24.jpg" />
+    <None Remove="Resources\Images\star.png" />
+    <None Remove="Resources\Images\starborder.png" />
+    <None Remove="Resources\Images\suboticacentar.jpg" />
+    <None Remove="Resources\Images\sun.png" />
+    <None Remove="Resources\Images\textboxbackground.png" />
+    <None Remove="Resources\Images\user.png" />
+    <None Remove="Resources\Images\vehicle1.jpg" />
+    <None Remove="Resources\Images\vehicle2.jpg" />
+    <None Remove="Resources\Images\vehicle3.jpeg" />
+    <None Remove="Resources\Images\vehicle4.jpg" />
+    <None Remove="Resources\Images\view.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Resources\Data\complexTourRequests.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\add-button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\avatar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\bar-graph.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\bin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\biography.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\boy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\businessman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\chat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\chronometer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\compose.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\deadline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\diskette.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\duration.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\family.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\flag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\good-mark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\group.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\information.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\just-arrived.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\location.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\logout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\multimedia.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\observation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\oldman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\phone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\pin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\quit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\reportflag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\translation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\digital-7.ttf" />
+    <Resource Include="Resources\Images\1.png" />
+    <Resource Include="Resources\Images\2.png" />
+    <Resource Include="Resources\Images\driver.png" />
+    <Resource Include="Resources\Images\driver_back.png" />
+    <Resource Include="Resources\Images\driver_chart.png" />
+    <Resource Include="Resources\Images\driver_help.png" />
+    <Resource Include="Resources\Images\driver_medal.png" />
+    <Resource Include="Resources\Images\driver_notification.png" />
+    <Resource Include="Resources\Images\driver_signout.png" />
+    <Resource Include="Resources\Images\GuideWallpaperAndIcons\Background.jpg" />
+    <Resource Include="Resources\Images\GuideWallpaperAndIcons\Background2.webp" />
+    <Resource Include="Resources\Images\GuideWallpaperAndIcons\guidePlaceHolder.jpg" />
+    <Resource Include="Resources\Images\GuideWallpaperAndIcons\notoursplaceholder.jpg" />
+    <Resource Include="Resources\Images\GuideWallpaperAndIcons\placeholder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\homepage.png" />
+    <Resource Include="Resources\Images\icon_back.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\bell.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\calendar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\add-image.png" />
+    <Resource Include="Resources\Images\image.png" />
+    <Resource Include="Resources\Images\maleAvatar.jpg" />
+    <Content Include="Resources\Images\GuideWallpaperAndIcons\contract.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+    <Content Include="Resources\Images\house.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\location.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\view.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\AccommodationImages\smestaj11.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj12.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj13.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj2.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj21.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj22.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj23.jpg" />
+    <Resource Include="Resources\Images\AccommodationImages\smestaj24.jpg" />
+    <Content Include="Resources\Images\account3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\angle-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\arrow.png" />
+    <Resource Include="Resources\Images\arrow2.png" />
+    <Content Include="Resources\Images\cancelEvent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\exit.png" />
+    <Resource Include="Resources\Images\flag.png" />
+    <Resource Include="Resources\Images\map.png" />
+    <Content Include="Resources\Images\home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\icon_help.png" />
+    <Resource Include="Resources\Images\icon_sign_out.png" />
+    <Resource Include="Resources\Images\icon_statistics.png" />
+    <Resource Include="Resources\Images\icon_super_driver.png" />
+    <Resource Include="Resources\Images\notification.png" />
+    <Resource Include="Resources\Images\hamburger.png" />
+    <Resource Include="Resources\Images\mail.png" />
+    <Resource Include="Resources\Images\owner.png" />
+    <Content Include="Resources\Images\people.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\power-button-off.png" />
+    <Resource Include="Resources\Images\power-off.png" />
+    <Resource Include="Resources\Images\power.png" />
+    <Resource Include="Resources\Images\profile-user.png" />
+    <Resource Include="Resources\Images\profilepage.png" />
+    <Resource Include="Resources\Images\smestaj2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\beogradcentar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\kalemegdan.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\novisadcentar.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="QuestPDF" Version="2024.3.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\account.jpg" />
+    <Resource Include="Resources\Images\account2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\book.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\desnaStrela.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\forum.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\krug.png" />
+    <Resource Include="Resources\Images\levaStrela.jpg" />
+    <Resource Include="Resources\Images\notifications.jpg" />
+    <Resource Include="Resources\Images\petrovaradin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj11.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj12.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj21.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj22.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj23.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smestaj24.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\star.png" />
+    <Resource Include="Resources\Images\starborder.png" />
+    <Resource Include="Resources\Images\suboticacentar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\sun.png" />
+    <Resource Include="Resources\Images\textboxbackground.png" />
+    <Resource Include="Resources\Images\user.png" />
+    <Resource Include="Resources\Images\vehicle1.jpg" />
+    <Resource Include="Resources\Images\vehicle2.jpg" />
+    <Resource Include="Resources\Images\vehicle3.jpeg" />
+    <Resource Include="Resources\Images\vehicle4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Diagrams\" />
+  </ItemGroup>
+
+</Project>

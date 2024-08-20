@@ -1,0 +1,218 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guest.MyReservations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="430"
+      Background="{StaticResource BackgroundColor}"
+      Title="MyReservations">
+    <Page.Resources>
+        <Style TargetType="TabItem" x:Key="KozicTabItem">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid>
+                            <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Black" Background="{TemplateBinding Background}" CornerRadius="5,5,0,0">
+                                <ContentPresenter x:Name="ContentSite" HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="My reservations" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,20"></TextBlock>
+        <TabControl  x:Name="MyReservationsTab" Margin="10,0,10,0" Background="{StaticResource BackgroundColor}" BorderThickness="2" BorderBrush="Black">
+            <TabItem x:Name="PastTabItem" Header="Past reservations" Style="{StaticResource KozicTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding Path=PastReservations , UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource KozicBorder}" Background="{StaticResource SecondaryColor}" Margin="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=AccommodationName}" FontWeight="Bold" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="1" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/calendar.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Range}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="2" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/location.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Location}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="3" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/house.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Type}"></TextBlock>
+                                        </StackPanel>
+                                        <Button Grid.Column="1" Grid.Row="3" Content="Rate" Command="{Binding DataContext.NavigationToRateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource KozicButton}">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.CanExecuteNavigationToRating, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Value="False">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="UpcomingTabItem" Header="Upcoming reservations" Style="{StaticResource KozicTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding Path=UpcomingReservations , UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource KozicBorder}" Background="{StaticResource SecondaryColor}" Margin="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=AccommodationName}" FontWeight="Bold" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="1" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/calendar.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Range}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="2" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/location.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Location}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="3" Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/house.png" Width="16" Height="16"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Type}"></TextBlock>
+                                        </StackPanel>
+                                        <Button Grid.Column="1" Grid.Row="2" Content="Modify reservation" Command="{Binding DataContext.NavigationToModifyReservationCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource KozicButton}">
+                                                    <Setter Property="IsEnabled" Value="True"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.CanExecuteNavigationToModifying, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Value="True">
+                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button Grid.Column="1" Grid.Row="3" Content="Cancel reservation" Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="border" Background="coral" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="border" Property="Background" Value="#C2f2e2"/>
+                                                                        <Setter TargetName="border" Property="BorderBrush" Value="#32a887"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter TargetName="border" Property="Background" Value="LightGray"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.CanExecuteCancelingReservation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Value="False">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="RequestsTabItem" Header="Requests" Style="{StaticResource KozicTabItem}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding Path=Requests , UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Style="{StaticResource KozicBorder}" Background="{StaticResource SecondaryColor}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=AccommodationName}" FontWeight="Bold" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Source="../../../Resources/Images/calendar.png"/>
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding Path=NewDate}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,5,0,0" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                            <Image Width="16" Height="16">
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Source" Value="../../../Resources/Images/edit.png"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=Status}" Value="Declined">
+                                                                <Setter Property="Source" Value="../../../Resources/Images/delete.png"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
+                                                                <Setter Property="Source" Value="../../../Resources/Images/add.png"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <TextBlock Margin="5,0,0,0" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Status}"/>
+                                        </StackPanel>
+                                        <TextBlock Margin="0,5,0,0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Path=Comment , StringFormat='Additional comment: {0}'}"></TextBlock>
+                                    </Grid> 
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Page>

@@ -1,0 +1,248 @@
+﻿<UserControl x:Class="BookingApp.WPF.View.OwnerViews.RegisterAccommodationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:val="clr-namespace:BookingApp.WPF.View.Validation"
+             xmlns:cvt="clr-namespace:BookingApp.WPF.View.Converters"
+             xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1,1,3,3" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+    </UserControl.Resources>
+    <Grid
+        Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Text="Registration form"
+            Grid.Row="0"
+            Margin="3"
+            VerticalAlignment="Center"
+            FontSize="30" />
+        <Grid
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid
+                Grid.Column="0"
+                Margin="0,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="0"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Name" />
+                    <TextBox x:Name="accommodationName">
+                        <TextBox.Text>
+                            <Binding Path="AccommodationDto.Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:AccommodationNameValidation ValidationStep="ConvertedProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <AdornedElementPlaceholder Grid.Row="0" x:Name="accName" />
+                                    <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="1"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Location" />
+                    <ComboBox
+                        ItemsSource="{Binding Locations}"
+                        SelectedItem="{Binding Path=AccommodationDto.LocationDto, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="location">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding City}"/>
+                                    <TextBlock Text=","/>
+                                    <TextBlock Text="{Binding Country}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="2"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Type" />
+                    <ComboBox
+                        x:Name="type"
+                        SelectedItem="{Binding Path=AccommodationDto.Type, UpdateSourceTrigger=PropertyChanged,
+                            Converter={cvt:ComboBoxItemToAccommodationTypeConverter}}">
+                        <ComboBoxItem Content="Apartment" />
+                        <ComboBoxItem Content="House" />
+                        <ComboBoxItem Content="Cabin" />
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="3"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Maximum number of guests" />
+                    <TextBox x:Name="maxGuest">
+                        <TextBox.Text>
+                            <Binding Path="AccommodationDto.MaxGuest" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:MinMaxGuestNumberValidation ValidationStep="ConvertedProposedValue" Min="1" Max="5" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <AdornedElementPlaceholder Grid.Row="0" x:Name="accName" />
+                                    <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                Margin="20,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical"
+                    Grid.Row="0"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Minimum reservation days" />
+                    <TextBox x:Name="minStayDays">
+                        <TextBox.Text>
+                            <Binding Path="AccommodationDto.MinStayDays" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:ReservationDaysValidation ValidationStep="ConvertedProposedValue" Min="1" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <AdornedElementPlaceholder Grid.Row="0" x:Name="accName" />
+                                    <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="1"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Cancellation days" />
+                    <TextBox x:Name="cancellationDays">
+                        <TextBox.Text>
+                            <Binding Path="AccommodationDto.CancellationDays" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:ReservationDaysValidation ValidationStep="ConvertedProposedValue" Min="1" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <AdornedElementPlaceholder Grid.Row="0" x:Name="accName" />
+                                    <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="2"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150">
+                    <TextBlock Text="Image selection" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Content="Add images"
+                            Command="{Binding AddImages}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <StackPanel
+            Grid.Row="2"
+            Orientation="Horizontal"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center">
+            <Button
+                Content="Submit"
+                Command="{Binding RegisterAccommodation}"
+                Margin="0,0,50,0"/>
+            <Button
+                Content="Cancel"
+                Command="{Binding Cancel}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

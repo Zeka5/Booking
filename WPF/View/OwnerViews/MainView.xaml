@@ -1,0 +1,233 @@
+﻿<Window x:Class="BookingApp.WPF.View.OwnerViews.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cvt="clr-namespace:BookingApp.WPF.View.Converters"
+        xmlns:viewmodels="clr-namespace:BookingApp.WPF.ViewModels.OwnerViewModels"
+        xmlns:views="clr-namespace:BookingApp.WPF.View.OwnerViews"
+        mc:Ignorable="d"
+        Title="Owner" Height="500" Width="1000"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1,1,3,3" />
+        </Style>
+        <Style x:Key="navigationBarButtons"
+               TargetType="Button">
+            <Setter Property="Margin" Value="0, 5, 0, 5" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1,1,3,3" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border BorderBrush="Black"
+        BorderThickness="3"
+        x:Name="mainBorder">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    BorderBrush="Black"
+                    BorderThickness="0,0,2,0"
+                    Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="0"
+                                    Command="{Binding Home}"
+                                    Content="Home"
+                                    Style="{StaticResource ResourceKey=navigationBarButtons}" />
+                            <Button
+                                Grid.Row="1"
+                                Content="Modify reservations"
+                                Command="{Binding ModifyReservations}"
+                                Style="{StaticResource ResourceKey=navigationBarButtons}" />
+                            <Button
+                                Grid.Row="2"
+                                Content="Reviews"
+                                Command="{Binding Reviews}"
+                                Style="{StaticResource ResourceKey=navigationBarButtons}"/>
+                            <Button
+                                Grid.Row="3"
+                                Content="Renovations"
+                                Command="{Binding Renovations}"
+                                Style="{StaticResource ResourceKey=navigationBarButtons}" />
+                            <Button Grid.Row="4"
+                            Content="Forum"
+                            Style="{StaticResource ResourceKey=navigationBarButtons}" />
+                        </Grid>
+                        <Border
+                            BorderBrush="Black"
+                            BorderThickness="2"
+                            Grid.Row="1"
+                            Margin="10">
+                            <Grid HorizontalAlignment="Center">
+                                <Label Content="Shortcuts" FontWeight="Bold" VerticalAlignment="Top" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Grid
+                    Grid.Column="1"
+                    Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid
+                        Grid.Row="0"
+                        Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Column="0"
+                            Margin="3"
+                            Source="/Resources/Images/owner.png" />
+                        <Grid
+                            Grid.Column="1"
+                            Margin="10,3,3,3"
+                            VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="Vasilije Kiso" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Text="0601515715" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Text="kisovasilije46@gmail.com" />
+                        </Grid>
+                        <Grid
+                            x:Name="superOwnerGrid"
+                            Grid.Column="2"
+                            Margin="10,3,3,3"
+                            VerticalAlignment="Center">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SuperOwner.IsSuper, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="Super owner"
+                                FontWeight="Bold"
+                                Foreground="#efb73e">
+                            </TextBlock>
+                            <StackPanel
+                                Grid.Row="1"
+                                Orientation="Horizontal">
+                                <TextBlock Text="Total rates: " />
+                                <TextBlock Text="{Binding Path=SuperOwner.TotalRatings, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="2"
+                                Orientation="Horizontal">
+                                <TextBlock Text="Average rating: " />
+                                <TextBlock Text="{Binding Path=SuperOwner.AverageRating, UpdateSourceTrigger=PropertyChanged, Converter={cvt:DoubleValueRoundingConverter}}" />
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel
+                            Grid.Column="3"
+                            Height="26"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Content="Demo"
+                                Margin="0,0,10,0" />
+                            <Button Click="Notifications_Click">
+                                <Image
+                                    Source="/Resources/Images/notifications.jpg"
+                                    Width="20"
+                                    Height="20" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Border
+                        Grid.Row="1"
+                        BorderBrush="Black"
+                        BorderThickness="2">
+                        <Grid>
+                            <ContentControl Content="{Binding CurrentViewModel}">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                                        <views:HomeView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:ModifyReservationsViewModel}">
+                                        <views:ModifyReservationsView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:ReviewsViewModel}">
+                                        <views:ReviewsView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:RegisterAccommodationViewModel}">
+                                        <views:RegisterAccommodationView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:OverallStatsViewModel}">
+                                        <views:OverallStatsView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:AnnualStatsViewModel}">
+                                        <views:AnnualStatsView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:ScheduleRenovationViewModel}">
+                                        <views:ScheduleRenovationView />
+                                    </DataTemplate>
+                                    <DataTemplate DataType="{x:Type viewmodels:RenovationsDisplayViewModel}">
+                                        <views:RenovationsDisplayView />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid x:Name="notificationGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Frame
+                x:Name="notificationsFrame"
+                Visibility="Collapsed"
+                Grid.Column="1" />
+        </Grid>
+    </Grid>
+</Window>

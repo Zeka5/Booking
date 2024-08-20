@@ -1,0 +1,78 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guest.GuestPersonalData"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="430"
+      Background="{StaticResource BackgroundColor}"
+      Title="GuestPersonalData">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="2" Text="My account" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Image Grid.Row="1" Source="../../../Resources/Images/petrovaradin.jpg" Margin="15">
+            <Image.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+            </Image.Effect>
+        </Image>
+        <Border Margin="15" Grid.Row="1" Grid.Column="1" Style="{StaticResource KozicBorder}" Background="{StaticResource SecondaryColor}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="15" Text="{Binding Path=GuestDto.Username , StringFormat='Username: {0}'}"/>
+                <TextBlock Grid.Row="1" FontSize="15" Text="{Binding Path=GuestDto.Mode , StringFormat='Mode: {0}'}"/>
+                <TextBlock Grid.Row="2" FontSize="15" Text="{Binding Path=GuestDto.BonusPoints , StringFormat='Bonus points: {0}'}"/>
+            </Grid>
+        </Border>
+        <TextBlock Grid.Row="2" Text="Reviews" Margin="15,0,0,0" FontWeight="Bold" FontSize="25" VerticalAlignment="Center"/>
+
+        <ItemsControl Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding Ratings}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border  Margin="10,5,10,5" Padding="5" Style="{StaticResource KozicBorder}" Background="{StaticResource SecondaryColor}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Cleanliness:" Margin="0,0,5,0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Cleanliness}"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="RuleFollowing:" Margin="0,5,5,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding RuleFollowing}" Margin="0,5,0,0"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Accommodation:" Margin="0,5,5,0"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding AccommodationName}" Margin="0,5,0,0"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Additional Comment:" Margin="0,5,5,0"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AdditionalComment}" Margin="0,5,0,0"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </Grid>
+</Page>

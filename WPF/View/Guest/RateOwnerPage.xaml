@@ -1,0 +1,115 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guest.RateOwnerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+      xmlns:cvt="clr-namespace:BookingApp.WPF.View.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="430"
+      Background="White"
+      Title="RateOwnerPage">
+
+    <Grid Margin="20,0,20,0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Rate" FontSize="25" FontWeight="Bold"></TextBlock>
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <TextBlock TextWrapping="Wrap" Text="How would you rate cleanliness? " FontSize="15"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,0,30">
+            <ComboBox x:Name="CleanlinessComboBox" SelectedItem="{Binding AccommodationRatingDto.Cleanliness , UpdateSourceTrigger=PropertyChanged , Converter={cvt:ComboBoxItemToRating}}">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,0,0,20">
+            <TextBlock TextWrapping="Wrap" Text="How would you rate the corectness of the owner? " FontSize="15"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,30">
+            <ComboBox x:Name="OwnerCorrectnessComboBox" SelectedItem="{Binding AccommodationRatingDto.OwnerCorrectness , UpdateSourceTrigger=PropertyChanged , Converter={cvt:ComboBoxItemToRating}}">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="3">
+            <TextBlock Text="Add a comment" VerticalAlignment="Center" FontSize="15"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBox Text="{Binding AccommodationRatingDto.AdditionalComment}"></TextBox>
+        </Grid>
+        <Grid Grid.Row="5" Margin="0,30,0,0">
+            <TextBlock Text="Add pictures" FontSize="15"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="5" Grid.ColumnSpan="2" Margin="0,30,0,0">
+            <ComboBox x:Name="PictureComboBox" ItemsSource="{Binding Path=ImagesComboBox  , UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ImagePath}" Margin="118,0,0,000"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="1" Margin="0,10,20,20">
+            <Button HorizontalAlignment="Left" Width="95" Content="Add" FontSize="20" Command="{Binding AddPictureCommand}" CommandParameter="{Binding ElementName=PictureComboBox}"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="1" Margin="0,10,0,20">
+            <ToggleButton x:Name="Preview" Content="Preview" Width="100" HorizontalAlignment="Right">
+                <ToggleButton.Resources>
+                    <Style TargetType="Popup">
+                        <Setter Property="IsOpen" Value="{Binding IsChecked , ElementName=Preview}"/>
+                    </Style>
+                </ToggleButton.Resources>
+                <ToggleButton.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="20"/>
+                    </DataTemplate>
+                </ToggleButton.ContentTemplate>
+            </ToggleButton>
+            <Popup PlacementTarget="{Binding ElementName=Preview}" Placement="Left"  IsOpen="{Binding IsChecked , ElementName=Preview}" StaysOpen="{Binding IsChecked , ElementName=Preview}">
+                <Border Height="240" Width="200" Background="White" BorderBrush="Black" BorderThickness="1">
+                    <ItemsControl ItemsSource="{Binding Images , UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="50,0,0,0" Source="{Binding}" Width="50" Height="50" Stretch="Fill"></Image>
+                                    <Button Height="50" Command="{Binding DataContext.RemovePictureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                                        <Image Source="../../../Resources/Images/delete.png"></Image>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+            </Popup>
+        </Grid>
+        <Grid Grid.Row="7" Margin="0,10,0,0">
+            <TextBlock TextWrapping="Wrap" Text="How neccessary is renovation? " FontSize="15"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="1" Margin="0,10,0,20">
+            <ComboBox SelectedItem="{Binding Path=RenovationLevel, UpdateSourceTrigger=PropertyChanged , Converter={cvt:ComboBoxItemToRenovationLevel}}">
+                <ComboBoxItem Content="Level 1"/>
+                <ComboBoxItem Content="Level 2"/>
+                <ComboBoxItem Content="Level 3"/>
+                <ComboBoxItem Content="Level 4"/>
+                <ComboBoxItem Content="Level 5"/>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="8" Grid.ColumnSpan="2" Margin="0,0,0,20">
+            <Button Width="100" Content="Confirm rating" Command="{Binding ConfirmCommand }"/>
+        </Grid>
+    </Grid>
+</Page>
